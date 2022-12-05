@@ -9,10 +9,10 @@ day4 = do
   return ()
 
 part1 :: [String] -> Int
-part1 as = length $ filter ((==True) . doesContain . pairify) as
+part1 as = length $ filter (doesContain . pairify) as
 
 part2 :: [String] -> Int
-part2 as = length $ filter ((==True) . doesOverlap . pairify) as
+part2 as = length $ filter (doesOverlap . pairify) as
 
 pairify :: String -> ([Int], [Int])
 pairify a = bimap makeRange makeRange (makePair a)
