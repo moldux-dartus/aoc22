@@ -1,41 +1,25 @@
-    import Data.List
-    import Data.Maybe
-    import qualified Data.Map.Strict as M
+import Data.List
+import Control.Monad (liftM2, forM_)
+import Data.Bifunctor
 
-    main = do
-      t <- lines <$> readFile "bigboy.txt"
-      let ship  = makeShip (take 100 t)
-          iList = map (parseInstructions . words) $ drop 100 t
-      putStrLn $ part1 ship iList
-      putStrLn $ part2 ship iList
+main = do
+  s <- readFile "bigboy.txt"
+ -- mapM_ (putStrLn . flip solve s) [4,14]
+  putStrLn $ uncurry (++) $ solve 4 14 s
+  return ()
+type Marker = Int
 
-    part1 :: Foldable t => Ship -> t Instruction -> Answer
-    part1 ship iList = map head $ M.elems $ foldl' exec ship iList
+--solve :: Marker -> Marker -> String -> String
+solve m1 m2 s = bimap (show . length' m2) (show . length' m1) (tails s, tails s)
 
-    part2 :: Foldable t => Ship -> t Instruction -> Answer
-    part2 ship iList = map head $ M.elems $ foldl' exec' ship iList
+length' m = (+) m . length . takeWhile (not . isMarker' . take m)
 
-    type Answer      = String
-    type CrateStack  = String
-    type Ship        = M.Map Int CrateStack
-    type Instruction = (Int,Int,Int) --originally record
+isMarker' :: String -> Bool
+isMarker' chunk = go chunk []
+  where go [] acc = True
+        go (x:xs) acc = x `notElem` acc && go xs (x:acc)
 
-    makeShip :: [String] -> Ship --this function came to me in a dream
-    makeShip = M.fromList . zip [1..] . map (unwords . words) . transpose
-             . map (map snd . filter (\(a,b) -> a `elem` [2,6..800]) . zip [1..])
+isMarker :: String -> Bool
+isMarker chunk = nub chunk == chunk
 
-    parseInstructions :: [String] -> Instruction --very safe function
-    parseInstructions s' = (n, f, t)
-      where n  = read ((!!) s' 1) :: Int
-            f  = read ((!!) s' 3) :: Int
-            t  = read ((!!) s' 5) :: Int
-
-    exec :: Ship -> Instruction -> Ship
-    exec ship (moving, losingStack, gainingStack) = M.adjust (drop moving) losingStack tempShip
-      where tempShip = M.adjust (poppedStack ++) gainingStack ship
-            poppedStack = reverse $ take moving $ fromJust $ M.lookup losingStack ship
-
-    exec' :: Ship -> Instruction -> Ship
-    exec' ship (moving, losingStack, gainingStack) = M.adjust (drop moving) losingStack tempShip
-      where tempShip = M.adjust (poppedStack ++) gainingStack ship
-            poppedStack = {-reverse $-} take moving $ fromJust $ M.lookup losingStack ship
+--(bimap ((+) 14 . length . takeWhile (not . isMarker' . take 14)) ((+) 4 . length . takeWhile (not . isMarker' . take 4)) (tails t, tails t))

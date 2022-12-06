@@ -1,38 +1,31 @@
-	Mon Dec  5 15:24 2022 Time and Allocation Profiling Report  (Final)
+	Tue Dec  6 12:46 2022 Time and Allocation Profiling Report  (Final)
 
 	   profiling +RTS -p -RTS
 
-	total time  =       31.83 secs   (31827 ticks @ 1000 us, 1 processor)
-	total alloc = 128,167,597,944 bytes  (excludes profiling overheads)
+	total time  =       13.98 secs   (13981 ticks @ 1000 us, 1 processor)
+	total alloc = 47,775,637,056 bytes  (excludes profiling overheads)
 
-COST CENTRE       MODULE SRC                         %time %alloc
+COST CENTRE MODULE    SRC                         %time %alloc
 
-parseInstructions Main   app/Main.hs:(28,5)-(31,40)   49.9   44.3
-main              Main   app/Main.hs:(5,5)-(10,33)    24.4   26.8
-exec              Main   app/Main.hs:(34,5)-(36,86)   16.3   18.5
-exec'             Main   app/Main.hs:(39,5)-(41,90)    8.6   10.1
+isMarker'   Main      app/Main.hs:(19,1)-(21,56)   60.3   19.2
+length'     Main      app/Main.hs:16:1-65          31.0   63.8
+main        Main      app/Main.hs:(5,1)-(9,11)      4.4    7.8
+solve       Main      app/Main.hs:(13,1)-(14,19)    4.3    9.2
 
 
-                                                                                          individual      inherited
-COST CENTRE         MODULE                  SRC                        no.     entries  %time %alloc   %time %alloc
+                                                                                  individual      inherited
+COST CENTRE   MODULE                SRC                        no.     entries  %time %alloc   %time %alloc
 
-MAIN                MAIN                    <built-in>                 153           0    0.0    0.0   100.0  100.0
- CAF                Main                    <entire-module>            305           0    0.0    0.0     0.0    0.0
-  main              Main                    app/Main.hs:(5,5)-(10,33)  306           1    0.0    0.0     0.0    0.0
-  makeShip          Main                    app/Main.hs:(24,5)-(25,81) 312           1    0.0    0.0     0.0    0.0
-  parseInstructions Main                    app/Main.hs:(28,5)-(31,40) 311           0    0.0    0.0     0.0    0.0
- CAF                GHC.Conc.Signal         <entire-module>            277           0    0.0    0.0     0.0    0.0
- CAF                GHC.IO.Encoding         <entire-module>            261           0    0.0    0.0     0.0    0.0
- CAF                GHC.IO.Encoding.Iconv   <entire-module>            259           0    0.0    0.0     0.0    0.0
- CAF                GHC.IO.Exception        <entire-module>            253           0    0.0    0.0     0.0    0.0
- CAF                GHC.IO.Handle.FD        <entire-module>            251           0    0.0    0.0     0.0    0.0
- CAF                GHC.IO.Handle.Internals <entire-module>            250           0    0.0    0.0     0.0    0.0
- CAF                GHC.IO.Handle.Text      <entire-module>            249           0    0.0    0.0     0.0    0.0
- CAF                GHC.IO.FD               <entire-module>            189           0    0.0    0.0     0.0    0.0
- main               Main                    app/Main.hs:(5,5)-(10,33)  307           0   24.4   26.8   100.0  100.0
-  parseInstructions Main                    app/Main.hs:(28,5)-(31,40) 310     5000000   49.9   44.3    49.9   44.3
-  part1             Main                    app/Main.hs:13:5-66        308           1    0.2    0.0    16.5   18.5
-   exec             Main                    app/Main.hs:(34,5)-(36,86) 309     5000000   16.3   18.5    16.3   18.5
-  part2             Main                    app/Main.hs:16:5-67        314           1    0.1    0.0     8.7   10.1
-   exec'            Main                    app/Main.hs:(39,5)-(41,90) 315     5000000    8.6   10.1     8.6   10.1
-  makeShip          Main                    app/Main.hs:(24,5)-(25,81) 313           0    0.5    0.2     0.5    0.2
+MAIN          MAIN                  <built-in>                 125           0    0.0    0.0   100.0  100.0
+ CAF          Main                  <entire-module>            249           0    0.0    0.0     0.0    0.0
+  main        Main                  app/Main.hs:(5,1)-(9,11)   250           1    0.0    0.0     0.0    0.0
+ CAF          GHC.Conc.Signal       <entire-module>            244           0    0.0    0.0     0.0    0.0
+ CAF          GHC.IO.Encoding       <entire-module>            235           0    0.0    0.0     0.0    0.0
+ CAF          GHC.IO.Encoding.Iconv <entire-module>            233           0    0.0    0.0     0.0    0.0
+ CAF          GHC.IO.Handle.FD      <entire-module>            225           0    0.0    0.0     0.0    0.0
+ CAF          GHC.IO.Handle.Text    <entire-module>            223           0    0.0    0.0     0.0    0.0
+ CAF          GHC.IO.FD             <entire-module>            163           0    0.0    0.0     0.0    0.0
+ main         Main                  app/Main.hs:(5,1)-(9,11)   251           0    4.4    7.8   100.0  100.0
+  solve       Main                  app/Main.hs:(13,1)-(14,19) 252           1    4.3    9.2    95.6   92.2
+   length'    Main                  app/Main.hs:16:1-65        253           2   31.0   63.8    91.3   83.0
+    isMarker' Main                  app/Main.hs:(19,1)-(21,56) 254   177605446   60.3   19.2    60.3   19.2

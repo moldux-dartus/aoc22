@@ -39,3 +39,8 @@ exec' :: Ship -> Instruction -> Ship
 exec' ship (moving, losingStack, gainingStack) = M.adjust (drop moving) losingStack tempShip
   where tempShip = M.adjust (poppedStack ++) gainingStack ship
         poppedStack = {-reverse $-} take moving $ fromJust $ M.lookup losingStack ship
+
+usb = 5651.93
+zog = 7332.74
+usaa = 4977.46
+csl = 10412.76
